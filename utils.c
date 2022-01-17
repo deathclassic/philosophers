@@ -6,7 +6,7 @@
 /*   By: tcharmel <tcharmel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:56:54 by tcharmel          #+#    #+#             */
-/*   Updated: 2022/01/17 16:46:06 by tcharmel         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:16:06 by tcharmel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ int	error_message(int i)
 		printf("Error: invalid arguments\n");
 		return (1);
 	}
-	if (i == 2)
-	{
-		printf("Press F to pay respect\n");
-	}
 	return (0);
 }
 
@@ -32,8 +28,22 @@ long long	get_time(void)
 	struct timeval	time;
 	
 	gettimeofday(&time, NULL);
-	res = time.tv_sec * 1000 + time.tv_usec/1000;
+	res = time.tv_sec * (long long)1000 + time.tv_usec/1000;
 	return (res);
+}
+
+void	sync_usleep(long long time)
+{
+	long long	start;
+	long long	end;
+
+	start = get_time();
+	end = get_time() + time;
+	while (start < end)
+	{
+		usleep(100);
+		start = get_time();
+	}
 }
 
 int	ft_atoi(const char *str)

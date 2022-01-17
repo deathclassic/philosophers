@@ -6,7 +6,7 @@
 /*   By: tcharmel <tcharmel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:24:32 by tcharmel          #+#    #+#             */
-/*   Updated: 2022/01/17 16:24:51 by tcharmel         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:58:45 by tcharmel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,9 @@ int			ft_atoi(const char *str);
 long long	get_time(void);
 int			error_message(int i);
 void		initialize(t_config *config);
+void		*philo_cycle(void *v_phil);
+void		sync_usleep(long long time);
+int			death(t_config *config, int i);
+void		free_all(t_config *config);
 
 #endif
