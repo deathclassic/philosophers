@@ -6,7 +6,7 @@
 /*   By: tcharmel <tcharmel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:24:29 by tcharmel          #+#    #+#             */
-/*   Updated: 2022/01/17 18:14:05 by tcharmel         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:48:40 by tcharmel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	invite_even_phil(t_config *config)
 	int			i;
 	pthread_t	thread;
 	
+	i = 0;
 	while(i < config->n_phil)
 	{
 		if (i % 2 == 0)
@@ -37,7 +38,8 @@ int	invite_odd_phil(t_config *config)
 {
 	int			i;
 	pthread_t	thread;
-	
+
+	i = 0;	
 	while(i < config->n_phil)
 	{
 		if (i % 2 == 1)
@@ -59,10 +61,10 @@ void	*check_conditions(void *v_config)
 	t_config	*config;
 	int			i;
 
-	i = 0;
 	config = (t_config *)v_config;
 	while(1)
 	{
+		i = 0;
 		if (config->p_full >= config->n_phil)
 		{
 			pthread_mutex_lock(config->speech);
