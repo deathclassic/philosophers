@@ -6,42 +6,53 @@
 /*   By: tcharmel <tcharmel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:24:32 by tcharmel          #+#    #+#             */
-/*   Updated: 2022/01/14 15:39:01 by tcharmel         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:24:51 by tcharmel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
 #include <pthread.h>
 #include <semaphore.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "libft/libft.h"
+#include <time.h>
+#include <sys/time.h>
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
-
-typedef pthread_mutex_t t_mutex;
-
-typedef struct s_config{
-	int		n_phil;
-	int		eat;
-	int		sleep;
-	int		die;
-	int		n_eat;
-	t_mutex	*mtx;
-}	t_config;
+typedef pthread_mutex_t t_mtx;
+typedef struct s_config t_config;
 
 typedef struct s_phil{
-	t_config	data;
-	t_mutex		*left;
-	t_mutex		*right;
-	int			status;
+	long long	last_dinner;
+	t_config	*data;
+	t_mtx		*left_f;
+	t_mtx		*right_f;
+	t_mtx		*speech;
 	int			id;
+	int			time_left;
+	int			had_dinner;
+	int			is_eating;
+	int			*is_full;
 }	t_phil;
 
-typedef struct s_list{
-	t_phil			phil;
-	struct	s_list *next;
-}	t_list;
+typedef struct s_config{
+	int			n_phil;
+	int			eat_time;
+	int			sleep_time;
+	int			die_time;
+	int			eat_limit;
+	int			p_full;
+	t_mtx		*all_forks;
+	t_mtx		*speech;
+	t_phil		*phil;
+	long long	start;
+}	t_config;
+
+int			ft_atoi(const char *str);
+long long	get_time(void);
+int			error_message(int i);
+void		initialize(t_config *config);
 
 #endif
